@@ -111,17 +111,7 @@ namespace MyExpenses.Repository
         {
             lock (locker)
             {
-                T tmpRecord = GetItem<T>(id);
-                if (tmpRecord.Version == 0)
-                {
-                    return database.Delete<T>(id);
-                }
-                else
-                {
-                    tmpRecord.IsDeleted = true;
-                    tmpRecord.UpdatedDate = DateTime.Now;
-                    return SaveItem<T>(tmpRecord);
-                }
+                return database.Delete<T>(id);
             }
         }
     }

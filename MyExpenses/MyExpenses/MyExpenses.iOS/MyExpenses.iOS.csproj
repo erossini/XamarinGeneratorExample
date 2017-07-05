@@ -88,6 +88,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Dependencies\SQLite_iOS.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -184,10 +185,39 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MyExpenses.Data\MyExpenses.Data.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>MyExpenses.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MyExpenses.Enums\MyExpenses.Enums.csproj">
+      <Project>{4ae71510-1e6b-4597-9fb5-465c6aa607b0}</Project>
+      <Name>MyExpenses.Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MyExpenses.EventsArgs\MyExpenses.EventsArgs.csproj">
+      <Project>{7d757ef9-5b25-4e22-9b12-d07677217113}</Project>
+      <Name>MyExpenses.EventsArgs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MyExpenses.Interfaces\MyExpenses.Interfaces.csproj">
+      <Project>{e99ca5bd-0900-457f-ae04-23b5cfac24a8}</Project>
+      <Name>MyExpenses.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MyExpenses.Repository\MyExpenses.Repository.csproj">
+      <Project>{3361455a-9eb3-4d7e-bace-36b1cd7f62ec}</Project>
+      <Name>MyExpenses.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyExpenses\MyExpenses.csproj">
       <Project>{ebbdd517-483a-4d18-b5f4-b71ee66d0e1c}</Project>
       <Name>MyExpenses</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GenericIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\settings%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

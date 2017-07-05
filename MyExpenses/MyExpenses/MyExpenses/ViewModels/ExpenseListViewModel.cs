@@ -63,6 +63,7 @@ namespace MyExpenses.ViewModels {
             if (list != null) {
                 foreach (Expense expense in list) {
                     ExpenseModel model = expense.ToExpense();
+                    model.ImagePath = "GenericIcon.png";
                     ExpensesList.Add(model);
                     OnPropertyChanged("ExpensesList");
                 }

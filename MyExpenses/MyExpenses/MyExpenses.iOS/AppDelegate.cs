@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using ImageCircle.Forms.Plugin.iOS;
 
 namespace MyExpenses.iOS
 {
@@ -23,6 +24,10 @@ namespace MyExpenses.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            // xam.plugin init
+            ImageCircleRenderer.Init();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

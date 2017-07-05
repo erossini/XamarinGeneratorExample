@@ -22,7 +22,7 @@ namespace MyExpenses.Data {
         /// </value>
         [PrimaryKey, AutoIncrement]
         [Indexed]
-        public int Id { get; set; } = 0;
+        public int Id { get; set; }
 
         #endregion
 
