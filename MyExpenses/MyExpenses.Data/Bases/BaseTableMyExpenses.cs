@@ -13,7 +13,6 @@ namespace MyExpenses.Data {
     /// <seealso cref="MyExpenses.Data.Interfaces.ITableEntityMyExpenses" />
     public class BaseTableMyExpenses : ITableEntityMyExpenses {
         #region ITableEntity implementation
-
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
@@ -23,7 +22,6 @@ namespace MyExpenses.Data {
         [PrimaryKey, AutoIncrement]
         [Indexed]
         public int Id { get; set; }
-
         #endregion
 
         /// <summary>
@@ -42,40 +40,6 @@ namespace MyExpenses.Data {
         /// </value>
         public DateTime UpdatedDate { get; set; } = DateTime.Now;
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance is deleted.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance is deleted; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsDeleted { get; set; } = false;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance is synchronize.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance is synchronize; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsSynchronize { get; set; } = false;
-
-        /// <summary>
-        /// Gets or sets the synchronize date.
-        /// </summary>
-        /// <value>
-        /// The synchronize date.
-        /// </value>
-        public DateTime? SynchronizeDate { get; set; } = null;
-
-        /// <summary>
-        /// Gets or sets the synchronize.
-        /// </summary>
-        /// <value>The synchronize.</value>
-        public int SynchronizeId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the item version.
-        /// </summary>
-        /// <value>The version.</value>
-        public int Version { get; set; } = 0;
+        public bool IsDeleted { get; set; }
     }
 }

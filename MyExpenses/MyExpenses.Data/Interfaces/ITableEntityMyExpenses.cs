@@ -29,11 +29,5 @@ namespace MyExpenses.Data.Interfaces {
         /// The updated date.
         /// </value>
         DateTime UpdatedDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the item version.
-        /// </summary>
-        /// <value>The version.</value>
-        int Version { get; set; }
     }
 }

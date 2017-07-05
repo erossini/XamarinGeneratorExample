@@ -154,6 +154,18 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MyExpenses.Data\MyExpenses.Data.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>MyExpenses.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MyExpenses.Enums\MyExpenses.Enums.csproj">
+      <Project>{4ae71510-1e6b-4597-9fb5-465c6aa607b0}</Project>
+      <Name>MyExpenses.Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MyExpenses.EventsArgs\MyExpenses.EventsArgs.csproj">
+      <Project>{7d757ef9-5b25-4e22-9b12-d07677217113}</Project>
+      <Name>MyExpenses.EventsArgs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MyExpenses.Interfaces\MyExpenses.Interfaces.csproj">
       <Project>{E99CA5BD-0900-457F-AE04-23B5CFAC24A8}</Project>
       <Name>MyExpenses.Interfaces</Name>

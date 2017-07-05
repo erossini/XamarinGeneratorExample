@@ -58,7 +58,7 @@ namespace MyExpenses.ViewModels {
         /// </summary>
         public void LoadData()  {
             Section = Enums.SectionImage.Expense;
-            Expense expense = null;
+            Expense expense = new Expense();
             if (Id != 0)  {
                 expense = repo.GetExpense(Id);
                 AssociateData(expense);
