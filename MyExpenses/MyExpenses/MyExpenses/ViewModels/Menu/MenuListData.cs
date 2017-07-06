@@ -10,8 +10,8 @@ namespace MyExpenses.ViewModels
 		{
 			this.Add(new MenuItems()
 			{
-				Title = "Appointment",
-				IconSource = "Home.png",
+				Title = "Expense",
+				IconSource = "GeneralIcon.png",
 				TargetType = typeof(ExpenseList)
 			});
 		}

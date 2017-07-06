@@ -6,80 +6,87 @@
              xmlns:enums="clr-namespace:MyExpenses.Enums;assembly=MyExpenses.Enums"
              xmlns:psce="clr-namespace:PSC.Xamarin.Controls.EnumBindablePicker;assembly=PSC.Xamarin.Controls.EnumBindablePicker"
              x:Class="MyExpenses.Views.ExpenseItem" x:Name="ExpenseItemPage" Title="Expense">
-  <ContentPage.ToolbarItems>
-    <ToolbarItem Command="{Binding SaveExpenseItem}" Order="Primary" Priority="0" Text="Save">
-    </ToolbarItem>
-  </ContentPage.ToolbarItems>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding SaveExpenseItem}" Order="Primary" Priority="0" Text="Save">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource" Android="Save.png" WinPhone="Save.png" />
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0" WinPhone="10"/>
+    </ContentPage.Padding>
 
-  <ContentPage.Content>
-    <ScrollView>
-      <ContentView x:Name="cvLoading" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy, Mode=OneWay}" BackgroundColor="White" Padding="10, 0">
-        <ActivityIndicator WidthRequest="110" HeightRequest="70" IsRunning="True" IsVisible="True" Color="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-      </ContentView>
+    <ContentPage.Content>
+        <ScrollView>
+            <ContentView x:Name="cvLoading" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsBusy, Mode=OneWay}" BackgroundColor="White" Padding="10, 0">
+                <ActivityIndicator WidthRequest="110" HeightRequest="70" IsRunning="True" IsVisible="True" Color="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+            </ContentView>
 
-      <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
-        <StackLayout.Padding>
-          <OnIdiom x:TypeArguments="Thickness">
-            <OnIdiom.Phone>10,10,10,10</OnIdiom.Phone>
-            <OnIdiom.Tablet>20,20,20,10</OnIdiom.Tablet>
-          </OnIdiom>
-        </StackLayout.Padding>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical">
+                <StackLayout.Padding>
+                    <OnIdiom x:TypeArguments="Thickness">
+                        <OnIdiom.Phone>10,10,10,10</OnIdiom.Phone>
+                        <OnIdiom.Tablet>20,20,20,10</OnIdiom.Tablet>
+                    </OnIdiom>
+                </StackLayout.Padding>
 
-        <StackLayout IsVisible="{Binding ShowErrors}" HorizontalOptions="FillAndExpand">
-            <Frame HasShadow ="false" OutlineColor="#E14063" Margin="0, 10">
-                <Label Text ="{Binding ErrorDescription}" TextColor="#E14063" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" />
-            </Frame>
-        </StackLayout>
+                <StackLayout IsVisible="{Binding ShowErrors}" HorizontalOptions="FillAndExpand">
+                    <Frame HasShadow ="false" OutlineColor="#E14063" Margin="0, 10">
+                        <Label Text ="{Binding ErrorDescription}" TextColor="#E14063" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" />
+                    </Frame>
+                </StackLayout>
 
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Expense date" />
-        </StackLayout>
-        <Entry Text="{Binding ExpenseDate}" HorizontalOptions="FillAndExpand" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Expense date" />
+                </StackLayout>
+                <Entry Text="{Binding ExpenseDate}" HorizontalOptions="FillAndExpand" />
 
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Description" />
-        </StackLayout>
-        <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Description" />
+                </StackLayout>
+                <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" />
 
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Expense value" />
-        </StackLayout>
-        <Entry Text="{Binding Cost}" HorizontalOptions="FillAndExpand" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Expense value" />
+                </StackLayout>
+                <Entry Text="{Binding Cost}" HorizontalOptions="FillAndExpand" />
 
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Category" />
-        </StackLayout>
-        <psce:EnumBindablePicker x:TypeArguments="enums:CategoryType" SelectedItem="{Binding Category}" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Category" />
+                </StackLayout>
+                <psce:EnumBindablePicker x:TypeArguments="enums:CategoryType" SelectedItem="{Binding Category}" />
 
-        <Grid HorizontalOptions="Fill">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-          </Grid.RowDefinitions>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-          </Grid.ColumnDefinitions>
-          <Label Text="Is recurrence?" Grid.Column="0" Grid.Row="0" />
-          <Switch IsToggled="{Binding IsRecurrence}" Grid.Column="1" Grid.Row="0" />
-        </Grid>
+                <Grid HorizontalOptions="Fill">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Is recurrence?" Grid.Column="0" Grid.Row="0" />
+                    <Switch IsToggled="{Binding IsRecurrence}" Grid.Column="1" Grid.Row="0" />
+                </Grid>
 
-        <StackLayout Orientation="Horizontal">
-          <Label Text="Recurrence pattern" />
-        </StackLayout>
-        <psce:EnumBindablePicker x:TypeArguments="enums:RecurrenceTimeType" SelectedItem="{Binding RecurrenceTime}" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Recurrence pattern" />
+                </StackLayout>
+                <psce:EnumBindablePicker x:TypeArguments="enums:RecurrenceTimeType" SelectedItem="{Binding RecurrenceTime}" />
 
-        <Grid HorizontalOptions="Fill">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-          </Grid.RowDefinitions>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-          </Grid.ColumnDefinitions>
-          <Label Text="Is an income?" Grid.Column="0" Grid.Row="0" />
-          <Switch IsToggled="{Binding IsIncome}" Grid.Column="1" Grid.Row="0" />
-        </Grid>
-      </StackLayout>
-    </ScrollView>
-  </ContentPage.Content>
+                <Grid HorizontalOptions="Fill">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Is an income?" Grid.Column="0" Grid.Row="0" />
+                    <Switch IsToggled="{Binding IsIncome}" Grid.Column="1" Grid.Row="0" />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>
