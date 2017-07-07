@@ -11,7 +11,7 @@ namespace MyExpenses.ViewModels
 			this.Add(new MenuItems()
 			{
 				Title = "Expense",
-				IconSource = "GeneralIcon.png",
+				IconSource = "GenericIconMenu.png",
 				TargetType = typeof(ExpenseList)
 			});
 		}

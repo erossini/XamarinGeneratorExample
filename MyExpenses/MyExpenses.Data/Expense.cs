@@ -10,7 +10,7 @@ namespace MyExpenses.Data {
     /// <summary>
     /// Class for expense table.
     /// </summary>
-    /// <seealso cref="MyExpenses.Data.BaseTable" />
+    /// <seealso cref="MyExpenses.Data.BaseTableMyExpenses" />
     [Table("Expense")]
     public class Expense : BaseTableMyExpenses {
         /// <summary>
@@ -19,15 +19,7 @@ namespace MyExpenses.Data {
         /// <value>
         /// The expensedate identifier.
         /// </value>
-        public string ExpenseDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        /// <value>
-        /// The description identifier.
-        /// </value>
-        public string Description { get; set; }
+        public DateTime ExpenseDate { get; set; }
 
         /// <summary>
         /// Gets or sets the cost.
@@ -36,14 +28,6 @@ namespace MyExpenses.Data {
         /// The cost identifier.
         /// </value>
         public int Cost { get; set; }
-
-        /// <summary>
-        /// Gets or sets the category.
-        /// </summary>
-        /// <value>
-        /// The category identifier.
-        /// </value>
-        public CategoryType Category { get; set; }
 
         /// <summary>
         /// Gets or sets the isrecurrence.
@@ -68,5 +52,21 @@ namespace MyExpenses.Data {
         /// The isincome identifier.
         /// </value>
         public bool IsIncome { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category.
+        /// </summary>
+        /// <value>
+        /// The category identifier.
+        /// </value>
+        public CategoryType Category { get; set; }
+
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>
+        /// The description identifier.
+        /// </value>
+        public string Description { get; set; }
     }
 }

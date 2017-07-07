@@ -7,15 +7,15 @@
              xmlns:psce="clr-namespace:PSC.Xamarin.Controls.EnumBindablePicker;assembly=PSC.Xamarin.Controls.EnumBindablePicker"
              x:Class="MyExpenses.Views.ExpenseItem" x:Name="ExpenseItemPage" Title="Expense">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding SaveExpenseItem}" Order="Primary" Priority="0" Text="Save">
+        <ToolbarItem Command="{Binding SaveExpenseItem}" Order="Primary" Priority="0" Text="Save" Icon="Save.png">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource" Android="Save.png" WinPhone="Save.png" />
             </ToolbarItem.Icon>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0" WinPhone="10"/>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0" WinPhone="10" />
     </ContentPage.Padding>
 
     <ContentPage.Content>
@@ -41,22 +41,12 @@
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Expense date" />
                 </StackLayout>
-                <Entry Text="{Binding ExpenseDate}" HorizontalOptions="FillAndExpand" />
-
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Description" />
-                </StackLayout>
-                <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" />
+                <DatePicker Format="dd/MM/yyyy" Date="{Binding ExpenseDate}" MinimumDate="{Binding ExpenseDate}" HorizontalOptions="FillAndExpand" />
 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Expense value" />
                 </StackLayout>
                 <Entry Text="{Binding Cost}" HorizontalOptions="FillAndExpand" />
-
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Category" />
-                </StackLayout>
-                <psce:EnumBindablePicker x:TypeArguments="enums:CategoryType" SelectedItem="{Binding Category}" />
 
                 <Grid HorizontalOptions="Fill">
                     <Grid.RowDefinitions>
@@ -85,6 +75,48 @@
                     </Grid.ColumnDefinitions>
                     <Label Text="Is an income?" Grid.Column="0" Grid.Row="0" />
                     <Switch IsToggled="{Binding IsIncome}" Grid.Column="1" Grid.Row="0" />
+                </Grid>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Category" />
+                </StackLayout>
+                <psce:EnumBindablePicker x:TypeArguments="enums:CategoryType" SelectedItem="{Binding Category}" />
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Description" />
+                </StackLayout>
+                <Entry Text="{Binding Description}" HorizontalOptions="FillAndExpand" />
+                <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="128">
+                        </RowDefinition>
+                        <RowDefinition Height="Auto">
+                        </RowDefinition>
+                        <RowDefinition Height="*">
+                        </RowDefinition>
+                    </Grid.RowDefinitions>
+                    <local:ImageGallery ItemsSource="{Binding Images}" Grid.Row="0" BackgroundColor="#EEE9E5" LoadingImages="OnLoadingImages">
+                        <local:ImageGallery.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Source}" Aspect="AspectFit">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.PreviewImageCommand, Source={x:Reference ExpenseItemPage}}" CommandParameter="{Binding ImageId}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </DataTemplate>
+                        </local:ImageGallery.ItemTemplate>
+                    </local:ImageGallery>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Text="Add photo" Command="{Binding CameraCommand}" />
+                        <Button Grid.Column="1" Text="Pick photo" Command="{Binding PickCommand}" />
+                        <Button Grid.Column="2" Text="Delete photo" Command="{Binding DeleteCommand}" IsEnabled="{Binding ShowDelete}" />
+                    </Grid>
+                    <Image Source="{Binding PreviewImage}" Grid.Row="2" BackgroundColor="#F4F1EE" VerticalOptions="StartAndExpand" />
                 </Grid>
             </StackLayout>
         </ScrollView>

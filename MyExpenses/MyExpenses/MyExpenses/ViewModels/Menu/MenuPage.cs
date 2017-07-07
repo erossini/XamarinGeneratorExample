@@ -24,7 +24,8 @@ namespace MyExpenses.ViewModels
 				Content = new Image
 				{
 					Source = "Logo.png",
-					WidthRequest = 150
+					WidthRequest = 100,
+                    HorizontalOptions = LayoutOptions.Center
 				}
 			};
 

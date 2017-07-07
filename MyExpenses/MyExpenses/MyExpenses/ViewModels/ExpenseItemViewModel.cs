@@ -17,7 +17,7 @@ namespace MyExpenses.ViewModels {
     /// <summary>
     /// Class Expense item ViewModel
     /// </summary>
-    public class ExpenseItemViewModel : BaseForViewModel {
+    public class ExpenseItemViewModel : BaseGalleryImage {
        MyExpensesRepository repo = new MyExpensesRepository();
         bool saveOnDatabase = true;
 
@@ -58,10 +58,11 @@ namespace MyExpenses.ViewModels {
         /// </summary>
         public void LoadData()  {
             Section = Enums.SectionImage.Expense;
-            Expense expense = new Expense();
+            Expense expense = null;
             if (Id != 0)  {
                 expense = repo.GetExpense(Id);
                 AssociateData(expense);
+                LoadImages(Enums.SectionImage.Expense, Id);
             }
         }
 
@@ -72,12 +73,12 @@ namespace MyExpenses.ViewModels {
         private void AssociateData(Expense expense)  {
             if (expense != null)  {
                 ExpenseDate = expense.ExpenseDate;
-                Description = expense.Description;
                 Cost = expense.Cost;
-                Category = expense.Category;
                 IsRecurrence = expense.IsRecurrence;
                 RecurrenceTime = expense.RecurrenceTime;
                 IsIncome = expense.IsIncome;
+                Category = expense.Category;
+                Description = expense.Description;
             }
         }
         #endregion
@@ -87,7 +88,7 @@ namespace MyExpenses.ViewModels {
         /// Gets or sets the expensedate.
         /// </summary>
         /// <value>The expensedate.</value>
-        public string ExpenseDate
+        public DateTime ExpenseDate
          {
             get  {
                 return _expensedate;
@@ -100,26 +101,7 @@ namespace MyExpenses.ViewModels {
                 }
             }
         }
-        private string _expensedate;
-
-        /// <summary>
-        /// Gets or sets the description.
-        /// </summary>
-        /// <value>The description.</value>
-        public string Description
-         {
-            get  {
-                return _description;
-            }
-
-            set  {
-                if (_description != value)  {
-                    _description = value;
-                    OnPropertyChanged("Description");
-                }
-            }
-        }
-        private string _description;
+        private DateTime _expensedate = DateTime.Now;
 
         /// <summary>
         /// Gets or sets the cost.
@@ -139,25 +121,6 @@ namespace MyExpenses.ViewModels {
             }
         }
         private int _cost;
-
-        /// <summary>
-        /// Gets or sets the category.
-        /// </summary>
-        /// <value>The category.</value>
-        public CategoryType Category
-         {
-            get  {
-                return _category;
-            }
-
-            set  {
-                if (_category != value)  {
-                    _category = value;
-                    OnPropertyChanged("Category");
-                }
-            }
-        }
-        private CategoryType _category;
 
         /// <summary>
         /// Gets or sets the isrecurrence.
@@ -216,6 +179,44 @@ namespace MyExpenses.ViewModels {
         }
         private bool _isincome;
 
+        /// <summary>
+        /// Gets or sets the category.
+        /// </summary>
+        /// <value>The category.</value>
+        public CategoryType Category
+         {
+            get  {
+                return _category;
+            }
+
+            set  {
+                if (_category != value)  {
+                    _category = value;
+                    OnPropertyChanged("Category");
+                }
+            }
+        }
+        private CategoryType _category;
+
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>The description.</value>
+        public string Description
+         {
+            get  {
+                return _description;
+            }
+
+            set  {
+                if (_description != value)  {
+                    _description = value;
+                    OnPropertyChanged("Description");
+                }
+            }
+        }
+        private string _description;
+
         #endregion
         #region Events
         /// <summary>
@@ -268,15 +269,19 @@ namespace MyExpenses.ViewModels {
                 expense = repo.GetExpense(Id);
             }
             expense.ExpenseDate = ExpenseDate;
-            expense.Description = Description;
             expense.Cost = Cost;
-            expense.Category = Category;
             expense.IsRecurrence = IsRecurrence;
             expense.RecurrenceTime = RecurrenceTime;
             expense.IsIncome = IsIncome;
+            expense.Category = Category;
+            expense.Description = Description;
 
             if (saveOnDatabase) {
                Id = repo.SaveExpense(expense);
+
+                // save images on file system
+                SaveGallery();
+
                 OnFormSave(new SaveEventArgs() { CreatedOrUpdatedId = Id });
             }
             else {
@@ -291,10 +296,13 @@ namespace MyExpenses.ViewModels {
         /// Validates
         /// </summary>
         protected override void ValidateSelf()  {
-            // validation example
-            //if (Selected{tbl} == null)  {
-            //    this.ValidationErrors["Selected{tbl}"] = "{tbl} type is required";
-            //}
+            this.ValidationErrors.Clear();
+
+            if (Description == null)  {
+                this.ValidationErrors["Description"] = "Description type is required";
+            }
+
+            ShowErrors = this.ValidationErrors.Count > 0;
         }
         #endregion
     }

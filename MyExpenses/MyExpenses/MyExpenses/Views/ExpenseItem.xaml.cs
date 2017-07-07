@@ -38,6 +38,7 @@ namespace MyExpenses.Views  {
                 vm.FormSave += vm_FormSave;
                 vm.FormSaveError += vm_FormSaveError;
                 vm.ParamError += vm_ParamError;
+                vm.InitMedia();
                 BindingContext = vm;
             }
         }
@@ -58,8 +59,6 @@ namespace MyExpenses.Views  {
 
         private void vm_FormError(object sender, FormErrorEventArgs e)  {
             //LogHelpers.Save(Enums.EventType.Error, "ExpenseItem Parameters error -> " + e.Message);
-
-            throw new NotImplementedException();
         }
 
         private void OnLoadingImages(object sender, LoadingEventArgs e)  {

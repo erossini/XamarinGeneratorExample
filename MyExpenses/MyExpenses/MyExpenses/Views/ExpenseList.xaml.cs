@@ -63,7 +63,7 @@ namespace MyExpenses.Views {
 
         public async void OnDelete(object sender, EventArgs e) {
             var mi = ((MenuItem)sender);
-            bool answer = await DisplayAlert("", "Are you sure you want to delete it?", "Yes", "Cancel");
+            bool answer = await DisplayAlert("AppName", "Are you sure you want to delete it?", "Yes", "Cancel");
 
             if (answer) {
                 vm.DeleteItem((int)mi.CommandParameter);
